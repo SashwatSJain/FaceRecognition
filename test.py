@@ -10,25 +10,25 @@ cap = cv2.VideoCapture(0)
 cap.set(3, 2560)
 cap.set(4, 1600)
 
-sashwat_image = face_recognition.load_image_file("Sashwat Jain.jpg")
+name_image = face_recognition.load_image_file("image.jpg")
 # load all images(faces)
 
-sashwat_encoding = face_recognition.face_encodings(sashwat_image)[0]
+name_encoding = face_recognition.face_encodings(name_image)[0]
 # encode all faces
 
 known_face_encodings = [
-    sashwat_encoding
+    name_encoding
 ]
 
 # setup a known database of encodings
 
 known_face_names = [
-    "SASHWAT"
+    "NAME"
 ]
 
-fromEmail = 'sashwatjain2005@gmail.com'
-fromEmailPassword = 'Sashwat@1575'
-toEmail = 'sashwatjain2005@gmail.com'
+fromEmail = 'emailid@gmail.com'
+fromEmailPassword = 'Password'
+toEmail = 'emailid@gmail.com'
 save = open("log.txt", "a")
 
 
@@ -46,20 +46,16 @@ def send_email(subj, tex):
      msgroot.attach(msgalternative)
      msgtext = MIMEText(f'security cam found object{tex}')
      msgalternative.attach(msgtext)
-
-
      smtp = smtplib.SMTP('smtp.gmail.com', 587)
      smtp.starttls()
      smtp.login(fromEmail, fromEmailPassword)
      smtp.sendmail(fromEmail, toEmail, msgroot.as_string())
      smtp.quit()
-     # save = open("log.txt", "a")
      save.write('mail sent\n')
      print("Mail sent!")
 
 
 def log_data(time):
-    # save = open("log.txt", "a")
     save.write('unknown at ' + time + '\n')
     print("Data logged!")
 
