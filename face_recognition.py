@@ -11,24 +11,22 @@ cap.set(3, 2560)
 cap.set(4, 1600)
 
 name_image = face_recognition.load_image_file("image.jpg")
-# load all images(faces)
 
 name_encoding = face_recognition.face_encodings(name_image)[0]
-# encode all faces
 
 known_face_encodings = [
     name_encoding
 ]
 
-# setup a known database of encodings
+
 
 known_face_names = [
     "NAME"
 ]
 
-fromEmail = 'emailid@gmail.com'
+fromEmail = 'fromemailid@gmail.com'
 fromEmailPassword = 'Password'
-toEmail = 'emailid@gmail.com'
+toEmail = 'toemailid@gmail.com'
 save = open("log.txt", "a")
 
 
@@ -61,13 +59,13 @@ def log_data(time):
 
 
 def photo():
-    camera = cv2.VideoCapture(0)
+    camera2 = cv2.VideoCapture(0)
     for i in range(1):
-        return_value, image = camera.read()
+        return_value, image = camera2.read()
         cv2.imwrite(str(time.asctime(time.localtime(time.time()))) + '.jpg', image)
-        camera.release()
+        camera2.release()
+    del(camera2)    
     print("picture taken")
-    # save = open("log.txt", "a")
     save.write('picture taken\n')
 
 
@@ -101,9 +99,9 @@ while True:
             face_names.append(name)
             print(name, abcd)
             if name == "Unknown":
-                say("intruder alert")
+                
                 log_data(abcd)
-                say("data logged")
+                
                 photo()
                 say("photo taken")
                 send_email(subj=abcd, tex=f'at{abcd}')
